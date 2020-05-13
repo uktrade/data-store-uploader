@@ -12,12 +12,16 @@ https://docs.djangoproject.com/en/3.0/ref/settings/
 
 import os
 
+import environ
+
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/3.0/howto/deployment/checklist/
+
+env = environ.Env()
 
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = 'u!mqqi7o@ddkp-!n%fiun^f)eal(nofwy6mk1jsq1f9f8#hcek'
@@ -37,6 +41,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'authbroker_client',
 ]
 
 MIDDLEWARE = [
@@ -49,6 +54,12 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
 
+AUTO_LOGIN = env.bool('AUTO_LOGIN', False)
+if AUTO_LOGIN:
+    MIDDLEWARE += ['data_store_uploader.middleware.AutoLoginMiddleware']
+else:
+    MIDDLEWARE += ['authbroker_client.middleware.ProtectAllViewsMiddleware']
+    
 ROOT_URLCONF = 'data_store_uploader.urls'
 
 TEMPLATES = [
