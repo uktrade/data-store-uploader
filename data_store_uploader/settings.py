@@ -41,8 +41,10 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'authbroker_client',
-]
+    'core',
+    'sass_processor',
+    'webpack_loader',
+ ]
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -54,11 +56,11 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
 
-AUTO_LOGIN = env.bool('AUTO_LOGIN', False)
-if AUTO_LOGIN:
-    MIDDLEWARE += ['data_store_uploader.middleware.AutoLoginMiddleware']
-else:
-    MIDDLEWARE += ['authbroker_client.middleware.ProtectAllViewsMiddleware']
+# AUTO_LOGIN = env.bool('AUTO_LOGIN', False)
+# if AUTO_LOGIN:
+#     MIDDLEWARE += ['data_store_uploader.middleware.AutoLoginMiddleware']
+# else:
+#     MIDDLEWARE += ['authbroker_client.middleware.ProtectAllViewsMiddleware']
     
 ROOT_URLCONF = 'data_store_uploader.urls'
 
@@ -129,3 +131,59 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/3.0/howto/static-files/
 
 STATIC_URL = '/static/'
+
+STATICFILES_FINDERS = [
+    'django.contrib.staticfiles.finders.FileSystemFinder',
+    'django.contrib.staticfiles.finders.AppDirectoriesFinder',
+    'sass_processor.finders.CssFinder',
+]
+
+ASSETS_FOLDER = os.path.join(BASE_DIR, '_static')
+STATIC_FOLDER = os.path.join(BASE_DIR, 'static')
+STATIC_ROOT = ASSETS_FOLDER
+STATICFILES_DIRS = [
+    ('data_store_uploader', STATIC_FOLDER),
+]
+
+###
+
+# STATICFILES_FINDERS = [
+#     'django.contrib.staticfiles.finders.FileSystemFinder',
+#     'django.contrib.staticfiles.finders.AppDirectoriesFinder',
+#     'sass_processor.finders.CssFinder',
+# ]
+
+# ASSETS_FOLDER = os.path.join(BASE_DIR, '_static')
+
+# STATIC_ROOT = ASSETS_FOLDER
+
+# STATIC_FOLDER = os.path.join(BASE_DIR, 'static')
+
+# STATICFILES_DIRS = [
+#     ('data_store_uploader', STATIC_FOLDER),
+# ]
+
+# WEBPACK_LOADER = {
+#     'DEFAULT': {
+#         'BUNDLE_DIR_NAME': 'data_explorer/js/bundles/',
+#         'STATS_FILE': os.path.join(BASE_DIR, 'webpack-stats.json'),
+#     }
+# }
+
+# SASS_PROCESSOR_INCLUDE_DIRS = [
+#     STATIC_FOLDER,
+# ]
+
+# # if DEBUG:
+# #     STATICFILES_STORAGE = 'whitenoise.storage.CompressedStaticFilesStorage'
+# # else:
+# #     STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
+
+# SASS_PROCESSOR_INCLUDE_FILE_PATTERN = r'^.+\.scss$'
+
+# SASS_OUTPUT_STYLE = 'compressed'
+
+# SASS_PROCESSOR_ENABLED = DEBUG
+# SASS_PROCESSOR_AUTO_INCLUDE = DEBUG
+
+# ENABLE_DEBUG_TOOLBAR = env.bool('ENABLE_DEBUG_TOOLBAR', default=DEBUG)
