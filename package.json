@@ -1,0 +1,23 @@
+{
+  "name": "data-store-uploader",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/uktrade/data-store-uploader.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/uktrade/data-store-uploader/issues"
+  },
+  "homepage": "https://github.com/uktrade/data-store-uploader#readme",
+  "dependencies": {
+    "govuk-frontend": "^3.6.0",
+    "sass": "^1.26.5"
+  }
+}
