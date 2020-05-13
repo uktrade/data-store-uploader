@@ -29,7 +29,7 @@ SECRET_KEY = 'u!mqqi7o@ddkp-!n%fiun^f)eal(nofwy6mk1jsq1f9f8#hcek'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['data-store-uploader.london.cloudapps.digital', 'localhost']
 
 
 # Application definition
@@ -42,6 +42,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'authbroker_client',
+    'sass_processor',
 ]
 
 MIDDLEWARE = [
@@ -129,3 +130,7 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/3.0/howto/static-files/
 
 STATIC_URL = '/static/'
+
+ASSETS_FOLDER = os.path.join(BASE_DIR, '_static')
+STATIC_FOLDER = os.path.join(BASE_DIR, 'static')
+STATIC_ROOT = ASSETS_FOLDER
