@@ -5,8 +5,8 @@ job_defaults: &job_defaults
     python_image:
       type: string
 
-  postgres_image:
-    type: string
+    postgres_image:
+      type: string
 
   environment:
     DJANGO_SECRET_KEY: test
@@ -19,14 +19,17 @@ job_defaults: &job_defaults
     POSTGRES_PORT: 5432
     POSTGRES_USER: postgres
 
+
   working_directory: ~/app
 
   docker:
     - image: <<parameters.python_image>>
+      
     - image: <<parameters.postgres_image>>
 
   steps:
     - checkout
+    
     - restore_cache:
         name: Restore pip cache
         keys:
@@ -59,7 +62,7 @@ jobs:
   build:
     <<: *job_defaults
 
-workflow:
+workflows:
   version: 2
 
   # Current standard environment
