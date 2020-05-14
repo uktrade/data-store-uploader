@@ -19,7 +19,8 @@
   "homepage": "https://github.com/uktrade/data-store-uploader#readme",
   "dependencies": {
     "govuk-frontend": "^3.6.0",
-    "sass": "^1.26.5"
+    "sass": "^1.26.5",
+    "webpack-cli": "^3.3.11"
   },
   "devDependencies": {
     "webpack": "^4.43.0"
